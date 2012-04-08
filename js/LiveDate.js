@@ -52,7 +52,7 @@
 			result.milliseconds = diff;
 			result.future = future;
 
-			return result;
+			return result; 
 		}
 	};
 
