@@ -1,7 +1,7 @@
 (function( $ ){
 
 	var elements = [];
-
+	
 	var dateComparer = {
 
 		//Milliseconds
@@ -10,7 +10,6 @@
 		second : 1000,
 		day : 86400000,
 		
-
 		getTotalDiff : function(d1,d2) {		 
 			var result = {},
 			 		future = false,
