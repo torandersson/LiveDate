@@ -24,7 +24,7 @@ dateSelector : 'A JQuery selector to tell the plugin where to get the date from,
 
 mode: 'There are 2 modes, the default mode wich generates a result where each part of the result ie days, hours,minutes, seconds and milliseconds are maxed. Example lets say something happened 2 seconds ago. The result would be. 2 seconds, but the milliseconds would be 2000 milliseconds aswell. The other mode is the countdown mode, this mode generates a result where the result is broken down into days,hours,minutes,seconds. Example did something happened 2 hours ago. The result.hours would contain 2 and minutes,seconds,days, milliseconds would be 0;
 
-callback: The callback is the function that will get called each time the 
+callback: The callback with the result argument.
 
 interval: How ofthen should the setinterval be run. default 500 ms. 
 
