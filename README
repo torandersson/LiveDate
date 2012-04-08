@@ -1,30 +1,33 @@
 Lightweight "liveDates"
 
-1) Specify the markup with the date
+Setup
 
+1) First we need a date to compare with. For example one could create a span tag wich contains the date.
+	<span class="date"> [date] </span> [date] needs to be a valid datestring or milliseconds. 
+
+Example: 
 
 <div class="liveDate" >
-		<span class="show"></span>
-		<span style="display:none" class="date">
-			Fri Apr 10 2012 10:17:55 GMT+0100 (CET)
-		</span>
+	<span class="show"></span>
+	<span style="display:none" class="date">
+		Fri Apr 10 2012 10:17:55 GMT+0100 (CET)
+	</span>
 </div>
 
-2) Bind the elements to the function.
+2) Next we need to bind the element to JQuery LiveDate
 
-options 
-	dateSelector:
-		Selector to find the element containing the date.
+a) We find all elements with the class liveDate and attach the liveDate plugin to all the elements.
 
-	mode:
-		default: The result will contain the total elapsed days,hours,minutes,seconds,milliseconds.
+b) The function takes several configuration options. These options are. 
 
-		countdown: The result will contain the the elapsed time, but in days,hours,minutes,seconds,milliseconds, good for countdowns =)
+dateSelector : 'A JQuery selector to tell the plugin where to get the date from, in this case the date is in an element with the class date so we specify the selector as ".date"'
 
-	callback:
-		callback function with the result as argument.
+mode: 'There are 2 modes, the default mode wich generates a result where each part of the result ie days, hours,minutes, seconds and milliseconds are maxed. Example lets say something happened 2 seconds ago. The result would be. 2 seconds, but the milliseconds would be 2000 milliseconds aswell. The other mode is the countdown mode, this mode generates a result where the result is broken down into days,hours,minutes,seconds. Example did something happened 2 hours ago. The result.hours would contain 2 and minutes,seconds,days, milliseconds would be 0;
 
-$(".liveDate").liveDate({ 
+callback: The callback is the function that will get called each time the 
+
+
+	$(".liveDate").liveDate({ 
 		dateSelector: ".date",
 		mode: 'countdown',
 		callback: function(result){
@@ -32,6 +35,22 @@ $(".liveDate").liveDate({
 		}
 	});
 
-	function prettyPrint(result) {
-		return result.days + " days: " +  result.hours +" Hours: " +  result.minutes +" Minutes: " +result.seconds +  " Seconds: " ;  
-	};
+
+
+options 
+	dateSelector:
+	Selector to find the element containing the date.
+
+	mode:
+	default: The result will contain the total elapsed days,hours,minutes,seconds,milliseconds.
+
+	countdown: The result will contain the the elapsed time, but in days,hours,minutes,seconds,milliseconds, good for countdowns =)
+
+	callback:
+		callback function with the result as argument.
+
+
+
+function prettyPrint(result) {
+	return result.days + " days: " +  result.hours +" Hours: " +  result.minutes +" Minutes: " +result.seconds +  " Seconds: " ;  
+};
