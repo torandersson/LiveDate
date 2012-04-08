@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -57,14 +58,47 @@
 </div>
 
 
-<p>result: 
-23 days, 6 hours, 53 minutes, 42 seconds</p>
+<p>result: <div class="liveDate" >
+    <span class="show"></span>
+    <span style="display:none" class="date">
+      Fri Mar 16 2012 10:15:00 GMT+0300 (CET)
+    </span>
+  </div>
+
+  <div class="liveDate" >
+    
+    <span class="show"></span>
+    <span style="display:none" class="date">
+      Fri Mar 16 2012 10:17:20 GMT+0400 (CET)
+    </span>
+  </div>
+</p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/torandersson">torandersson</a></p>
         <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
       </footer>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script src="javascripts/scale.fix.js"></script>
+    <script src="javascripts/livedate.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        // Handler for .ready() called.
+        $(".liveDate").liveDate({ 
+          dateSelector: ".date",
+          mode: 'countdown',
+          callback: function(result){
+            $(this).children(".show").html(prettyPrint(result));
+          }
+        });
+
+        function prettyPrint(result) {
+          return result.days + " days: " +  result.hours +" Hours: " +  result.minutes +" Minutes: " +result.seconds +  " Seconds: " ;  
+        };
+
+      });
+
+    </script>
   </body>
 </html>
