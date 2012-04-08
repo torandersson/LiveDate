@@ -26,10 +26,13 @@ mode: 'There are 2 modes, the default mode wich generates a result where each pa
 
 callback: The callback is the function that will get called each time the 
 
+interval: How ofthen should the setinterval be run. default 500 ms. 
+
 
 	$(".liveDate").liveDate({ 
 		dateSelector: ".date",
 		mode: 'countdown',
+		interval: 200,
 		callback: function(result){
 			$(this).children(".show").html(prettyPrint(result));
 		}
