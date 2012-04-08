@@ -146,7 +146,7 @@
     
     timer.init();
 		timer.register(methods.publish);
-		timer.domReady();
+		
 
     // Method calling logic
     if ( methods[method] ) {
@@ -155,7 +155,9 @@
       return methods.init.apply( this, arguments );
     } else {
       $.error( 'Method ' +  method + ' does not exist on jQuery.liveDate' );
-    }    
+    }   
+
+    timer.domReady(); 
   
   };
 
