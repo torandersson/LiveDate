@@ -29,30 +29,14 @@ callback: The callback is the function that will get called each time the
 interval: How ofthen should the setinterval be run. default 500 ms. 
 
 
-	$(".liveDate").liveDate({ 
-		dateSelector: ".date",
-		mode: 'countdown',
-		interval: 200,
-		callback: function(result){
-			$(this).children(".show").html(prettyPrint(result));
-		}
-	});
-
-
-
-options 
-	dateSelector:
-	Selector to find the element containing the date.
-
-	mode:
-	default: The result will contain the total elapsed days,hours,minutes,seconds,milliseconds.
-
-	countdown: The result will contain the the elapsed time, but in days,hours,minutes,seconds,milliseconds, good for countdowns =)
-
-	callback:
-		callback function with the result as argument.
-
-
+$(".liveDate").liveDate({ 
+	dateSelector: ".date",
+	mode: 'countdown',
+	interval: 200,
+	callback: function(result){
+		$(this).children(".show").html(prettyPrint(result));
+	}
+});
 
 function prettyPrint(result) {
 	return result.days + " days: " +  result.hours +" Hours: " +  result.minutes +" Minutes: " +result.seconds +  " Seconds: " ;  
