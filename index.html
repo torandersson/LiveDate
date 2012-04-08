@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Livedate by torandersson</title>
+    
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Livedate</h1>
+        <p>JQuery plugin for livedates. </p>
+        <p class="view"><a href="https://github.com/torandersson/LiveDate">View the Project on GitHub <small>torandersson/LiveDate</small></a></p>
+        <ul>
+          <li><a href="https://github.com/torandersson/LiveDate/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/torandersson/LiveDate/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/torandersson/LiveDate">Fork On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h3>LiveDate</h3>
+
+<p>A very lightweight "live date" plugin for JQuery.</p>
+
+<div class="highlight">
+<pre><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"liveDate"</span> <span class="nt">&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"show"</span><span class="nt">&gt;&lt;/span&gt;</span>
+        <span class="nt">&lt;span</span> <span class="na">style=</span><span class="s">"display:none"</span> <span class="na">class=</span><span class="s">"date"</span><span class="nt">&gt;</span>
+            Fri Apr 10 2012 10:17:55 GMT+0100 (CET)
+        <span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+</pre>
+</div>
+
+
+<div class="highlight">
+<pre>    <span class="nx">$</span><span class="p">(</span><span class="s2">".liveDate"</span><span class="p">).</span><span class="nx">liveDate</span><span class="p">({</span> 
+        <span class="nx">dateSelector</span><span class="o">:</span> <span class="s2">".date"</span><span class="p">,</span>
+        <span class="nx">mode</span><span class="o">:</span> <span class="s1">'countdown'</span><span class="p">,</span>
+        <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">result</span><span class="p">){</span>
+            <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">children</span><span class="p">(</span><span class="s2">".show"</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">prettyPrint</span><span class="p">(</span><span class="nx">result</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+
+    <span class="kd">function</span> <span class="nx">prettyPrint</span><span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">result</span><span class="p">.</span><span class="nx">days</span> <span class="o">+</span> <span class="s2">" days, "</span> <span class="o">+</span>  <span class="nx">result</span><span class="p">.</span><span class="nx">hours</span> <span class="o">+</span><span class="s2">" hours, "</span> <span class="o">+</span>  <span class="nx">result</span><span class="p">.</span><span class="nx">minutes</span> <span class="o">+</span><span class="s2">" minutes, "</span> <span class="o">+</span><span class="nx">result</span><span class="p">.</span><span class="nx">seconds</span> <span class="o">+</span>  <span class="s2">" seconds "</span> <span class="p">;</span>  
+    <span class="p">};</span>
+
+</pre>
+</div>
+
+
+<p>result: 
+23 days, 6 hours, 53 minutes, 42 seconds</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/torandersson">torandersson</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+  </body>
+</html>
