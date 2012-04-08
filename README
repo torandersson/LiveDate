@@ -1,0 +1,34 @@
+Lightweight "liveDates"
+
+1) Specify the markup with the date
+
+
+<div class="liveDate" >
+		<span class="show"></span>
+		<span style="display:none" class="date">
+			Fri Apr 10 2012 10:17:55 GMT+0100 (CET)
+		</span>
+</div>
+
+2) Bind the elements to the function.
+
+options 
+	dateSelector:
+		Selector to find the element containing the date
+
+	mode:
+		default: The result will contain the total elapsed days,hours,minutes,seconds,milliseconds.
+
+		countdown: The result will contain the the elapsed time, but in days,hours,minutes,seconds,milliseconds, good for countdowns =)
+
+$(".liveDate").liveDate({ 
+		dateSelector: ".date",
+		mode: 'countdown',
+		callback: function(result){
+			$(this).children(".show").html(prettyPrint(result));
+		}
+	});
+
+	function prettyPrint(result) {
+		return result.days + " days: " +  result.hours +" Hours: " +  result.minutes +" Minutes: " +result.seconds +  " Seconds: " ;  
+	};
