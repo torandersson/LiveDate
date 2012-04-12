@@ -48,10 +48,6 @@
 </code>
 
 <code class="prettyprint">
-
-
-      $(document).ready(function() {
-                
         $(".liveDate-DateString").liveDate({
             mode: 'countdown',
             interval: 500,
@@ -62,7 +58,9 @@
               $(this).html(prettyPrint(result));
             }
         });
+</code>
 
+<code class="prettyprint">
         $(".liveDate-Milliseconds").liveDate({
             mode: 'countdown',
             interval: 1000,
@@ -74,7 +72,9 @@
               $(this).html(prettyPrint(result));
             }
         });
+</code>
 
+<code class="prettyprint">
         $(".liveDate-NoDate").liveDate({
             mode: 'countdown',
             interval: 1000, 
@@ -83,15 +83,12 @@
             }
         });
 
+</code>
 
+<code class="prettyprint">
         function prettyPrint(result) {
           return result.days + " days, " +  result.hours +" hours, " +  result.minutes +" minutes, " +result.seconds +  " seconds " ;  
         };
-
-      });
-
-
-
 </code>
 
 
