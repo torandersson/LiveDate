@@ -8,7 +8,6 @@
     second : 1000,
     day : 86400000,
     
-
     getTotalDiff : function(d1,d2) {     
       var result = {},
           future = false,
@@ -91,7 +90,7 @@
   };
 
   var methods = {
-    var elements = [];
+    var elements = [];
 
     init : function( options ) { 
       
@@ -103,15 +102,15 @@
           'date': new Date()
       }, options);
       
-    //Create timer and start it
+      //Create timer and start it
       timer.init(settings.interval);
-    timer.register(methods.publish);
-    timer.domReady();
+      timer.register(methods.publish);
+      timer.domReady();
 
       this.each(function() {
-          $this = $(this);  
+        $this = $(this);  
         this.elements.push({context:$this,date:settings.date($this), callback:settings.callback, mode:settings.mode});
-    });
+      });
     },
 
     publish : function(args){
