@@ -1,8 +1,6 @@
 (function( $ ){
-
-	var elements = [];
-	
-	var dateComparer = {
+  
+ 	var dateComparer = {
 
 		//Milliseconds
 		hour : 3600000,
@@ -53,20 +51,19 @@
 
 			return result; 
 		}
-	};
+	},
 
-	var timer = {
-		callbacks : {},
+	timer = {
+		
+    callbacks : [],
 
-		init : function(opts) {
-	    this.opts = opts || {};
-	    this.opts.stepInterval = this.opts.stepInterval || 500;
-	    this.stepInterval= this.opts.stepInterval; // ms
+		init : function(interval) {
+	    this.interval= interval || 500; // ms
 		},
 
 		domReady : function() {
    		var closure = this.bind(this.step);
-   		setInterval(closure, this.stepInterval);
+   		setInterval(closure, this.interval);
 		},
 
 		bind : function(method) {
@@ -79,6 +76,7 @@
 		},
 
 		register : function(callback) {
+      console.log("thiis",this);
     	this.callbacks[callback] = callback;
   	},
 
@@ -91,45 +89,50 @@
 	        this.callbacks[id].apply(this,arguments);
 	    }
 		}
-	};
+	},
 
-	var methods = {
-  	init : function( options ) { 
+	methods = {
+  	elements : [],
+
+    init : function( options ) { 
       
     	var that = this;
-      
-    	 // Create some defaults, extending them with any options that were provided
+		
     	var settings = $.extend( {
-      	'mode' : 'default',
+      		'mode' : 'default',
+      		'interval': 500,
+      		'date': new Date()
     	}, options);
+    
+		  //Create timer and start it
+    	timer.init(settings.interval);
+		  timer.register(methods.publish);
+		  timer.domReady();
 
     	this.each(function() {
       	$this = $(this);	
-    		elements.push({context:$this,dateSelector:settings.dateSelector, callback:settings.callback, mode:settings.mode});
-			});
-    },
-
-    subscribe : function(fn,dateSelector) {
-   		elements.push({context:this,dateSelector:dateSelector, callback:fn});
+        var elDate = new Date();
+        if(typeof settings.date === 'function')
+          elDate = settings.date($this)
+    		methods.elements.push({context:$this,date:elDate, callback:settings.callback, mode:settings.mode});
+		  });
     },
 
     publish : function(args){
-    	//No elements
-    	if(elements.length === 0){
+    	//No this.elements
+    	if(methods.elements.length === 0){
     		return false;
     	}
 
-    	for(var i = 0; i<elements.length;i++){
-    		var subscription = elements[i],
-    				el = $(subscription.context).find(subscription.dateSelector),
-    				date = new Date($(el).html()),  	  
+    	for(var i = 0; i<methods.elements.length;i++){
+    		var subscription = methods.elements[i],  	  
     	  		result = {};
 
-    	  		if(subscription.mode == "countdown")
-    	  			result = dateComparer.getGreedyDiff(new Date(),date);
-    	  		else
-    	  			result = dateComparer.getTotalDiff(new Date(),date);
-
+    		if(subscription.mode == "countdown")
+    	  		result = dateComparer.getGreedyDiff(new Date(),subscription.date);
+    	  	else
+    	  		result = dateComparer.getTotalDiff(new Date(),subscription.date);
+    	  	
     		subscription.callback.apply(subscription.context,[result]);
     	}	
     },
@@ -142,11 +145,6 @@
   };
 
   $.fn.liveDate = function( method ) {
-    
-    timer.init();
-		timer.register(methods.publish);
-		timer.domReady();
-
     // Method calling logic
     if ( methods[method] ) {
       return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
@@ -154,8 +152,7 @@
       return methods.init.apply( this, arguments );
     } else {
       $.error( 'Method ' +  method + ' does not exist on jQuery.liveDate' );
-    }    
-  
+    }   
   };
 
 })( jQuery );
