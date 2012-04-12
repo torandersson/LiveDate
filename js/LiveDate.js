@@ -1,6 +1,5 @@
 (function( $ ){
-  var elements = [];
-
+  
   var dateComparer = {
 
     //Milliseconds
@@ -56,7 +55,7 @@
   };
 
   var timer = {
-    callbacks : {},
+    var callbacks : {},
 
     init : function(interval) {
       this.interval= interval || 500; // ms
@@ -92,44 +91,44 @@
   };
 
   var methods = {
+    var elements = [];
+
     init : function( options ) { 
       
       var that = this;
-      
-
+    
       var settings = $.extend( {
-        'mode' : 'default',
-        'interval': 500
+          'mode' : 'default',
+          'interval': 500,
+          'date': new Date()
       }, options);
-
-      //Create timer and start it
+      
+    //Create timer and start it
       timer.init(settings.interval);
-      timer.register(methods.publish);
-      timer.domReady();
+    timer.register(methods.publish);
+    timer.domReady();
 
       this.each(function() {
-        $this = $(this);  
-        elements.push({context:$this,dateSelector:settings.dateSelector, callback:settings.callback, mode:settings.mode});
-      });
+          $this = $(this);  
+        this.elements.push({context:$this,date:settings.date($this), callback:settings.callback, mode:settings.mode});
+    });
     },
 
     publish : function(args){
-      //No elements
-      if(elements.length === 0){
+      //No this.elements
+      if(this.elements.length === 0){
         return false;
       }
 
-      for(var i = 0; i<elements.length;i++){
-        var subscription = elements[i],
-            el = $(subscription.context).find(subscription.dateSelector),
-            date = new Date($(el).html()),      
+      for(var i = 0; i<this.elements.length;i++){
+        var subscription = this.elements[i],      
             result = {};
 
         if(subscription.mode == "countdown")
-          result = dateComparer.getGreedyDiff(new Date(),date);
-        else
-          result = dateComparer.getTotalDiff(new Date(),date);
-
+            result = dateComparer.getGreedyDiff(new Date(),subscription.date);
+          else
+            result = dateComparer.getTotalDiff(new Date(),subscription.date);
+          
         subscription.callback.apply(subscription.context,[result]);
       } 
     },
