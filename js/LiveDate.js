@@ -51,10 +51,11 @@
 
       return result; 
     }
-  };
+  },
 
-  var timer = {
-    var callbacks : {},
+  timer = {
+    
+    callbacks : [],
 
     init : function(interval) {
       this.interval= interval || 500; // ms
@@ -75,6 +76,7 @@
     },
 
     register : function(callback) {
+    
       this.callbacks[callback] = callback;
     },
 
@@ -87,10 +89,10 @@
           this.callbacks[id].apply(this,arguments);
       }
     }
-  };
+  },
 
-  var methods = {
-    var elements = [];
+  methods = {
+    elements : [],
 
     init : function( options ) { 
       
@@ -101,26 +103,29 @@
           'interval': 500,
           'date': new Date()
       }, options);
-      
+    
       //Create timer and start it
       timer.init(settings.interval);
       timer.register(methods.publish);
       timer.domReady();
 
       this.each(function() {
-        $this = $(this);  
-        this.elements.push({context:$this,date:settings.date($this), callback:settings.callback, mode:settings.mode});
-      });
+          $this = $(this);  
+          var elDate = new Date();
+          if(typeof settings.date === 'function')
+            elDate = settings.date($this);
+        methods.elements.push({context:$this,date:elDate, callback:settings.callback, mode:settings.mode});
+    });
     },
 
     publish : function(args){
       //No this.elements
-      if(this.elements.length === 0){
+      if(methods.elements.length === 0){
         return false;
       }
 
-      for(var i = 0; i<this.elements.length;i++){
-        var subscription = this.elements[i],      
+      for(var i = 0; i<methods.elements.length;i++){
+        var subscription = methods.elements[i],     
             result = {};
 
         if(subscription.mode == "countdown")
