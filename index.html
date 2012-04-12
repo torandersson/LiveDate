@@ -70,11 +70,11 @@
 
 <p>result: 
   <br>
- <!--With date string -->
+    <!--With date string -->
   <time datetime="Fri Mar 16 2012 10:17:45 GMT+0600 (CET)" class="liveDate-DateString"></time>
   <br>
  <!--With milliseconds string -->
-  <time datetime="2913456790906" class="liveDate-Milliseconds"></time>
+  <time datetime="1460100010000" class="liveDate-Milliseconds"></time>
   <br>
   <!--With no date set -->
   <time datetime="" class="liveDate-NoDate"></time>
@@ -91,14 +91,35 @@
     <script src="javascripts/scale.fix.js"></script>
     <script src="javascripts/livedate.js"></script>
     <script type="text/javascript">
-      $(document).ready(function() {
-        // Handler for .ready() called.
-        $(".liveDate").liveDate({ 
-          dateSelector: ".date",
-          mode: 'countdown',
-          callback: function(result){
-            $(this).children(".show").html(prettyPrint(result));
-          }
+       $(".liveDate-DateString").liveDate({
+            mode: 'countdown',
+            interval: 500,
+            date: function(context) {
+              return new Date($(context).attr("datetime"));
+            },
+            callback: function(result){
+              $(this).html(prettyPrint(result));
+            }
+        });
+
+        $(".liveDate-Milliseconds").liveDate({
+            mode: 'countdown',
+            interval: 1000,
+            date: function(context) {
+              var milliseconds = parseInt($(context).attr("datetime"));
+              return new Date(milliseconds);
+            },
+            callback: function(result){
+              $(this).html(prettyPrint(result));
+            }
+        });
+
+        $(".liveDate-NoDate").liveDate({
+            mode: 'countdown',
+            interval: 1000, 
+            callback: function(result){
+              $(this).html(prettyPrint(result));
+            }
         });
 
         function prettyPrint(result) {
